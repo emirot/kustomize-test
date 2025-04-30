@@ -1,1 +1,21 @@
-
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: private-http-api-ingress
+  annotations:
+    ns: "my-ns"
+spec:
+  tls:
+    - hosts:
+        - test.com
+  rules:
+    - host: test.com/test
+      http:
+        paths:
+          - path: null
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: api-http
+                port:
+                  name: https
